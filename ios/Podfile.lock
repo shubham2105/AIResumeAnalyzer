@@ -1,21 +1,51 @@
 PODS:
   - FBLazyVector (0.86.0)
+  - Firebase/Auth (12.15.0):
+    - Firebase/CoreOnly
+    - FirebaseAuth (~> 12.15.0)
   - Firebase/CoreOnly (12.15.0):
     - FirebaseCore (~> 12.15.0)
+  - FirebaseAppCheckInterop (12.15.0)
+  - FirebaseAuth (12.15.0):
+    - FirebaseAppCheckInterop (~> 12.15.0)
+    - FirebaseAuthInterop (~> 12.15.0)
+    - FirebaseCore (~> 12.15.0)
+    - FirebaseCoreExtension (~> 12.15.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 8.1)
+    - GoogleUtilities/Environment (~> 8.1)
+    - GTMSessionFetcher/Core (< 6.0, >= 3.4)
+    - RecaptchaInterop (~> 101.0)
+  - FirebaseAuthInterop (12.15.0)
   - FirebaseCore (12.15.0):
     - FirebaseCoreInternal (~> 12.15.0)
     - GoogleUtilities/Environment (~> 8.1)
     - GoogleUtilities/Logger (~> 8.1)
+  - FirebaseCoreExtension (12.15.0):
+    - FirebaseCore (~> 12.15.0)
   - FirebaseCoreInternal (12.15.0):
     - "GoogleUtilities/NSData+zlib (~> 8.1)"
+  - GoogleUtilities/AppDelegateSwizzler (8.1.1):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+    - GoogleUtilities/Privacy
   - GoogleUtilities/Environment (8.1.1):
     - GoogleUtilities/Privacy
   - GoogleUtilities/Logger (8.1.1):
     - GoogleUtilities/Environment
     - GoogleUtilities/Privacy
+  - GoogleUtilities/Network (8.1.1):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Privacy
+    - GoogleUtilities/Reachability
   - "GoogleUtilities/NSData+zlib (8.1.1)":
     - GoogleUtilities/Privacy
   - GoogleUtilities/Privacy (8.1.1)
+  - GoogleUtilities/Reachability (8.1.1):
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Privacy
+  - GTMSessionFetcher/Core (5.3.0)
   - hermes-engine (250829098.0.14):
     - hermes-engine/Pre-built (= 250829098.0.14)
   - hermes-engine/Pre-built (250829098.0.14)
@@ -1930,7 +1960,8 @@ PODS:
     - React-utils (= 0.86.0)
     - ReactNativeDependencies
   - ReactNativeDependencies (0.86.0)
-  - RNFBApp (25.0.1):
+  - RecaptchaInterop (101.0.0)
+  - RNFBApp (25.1.0):
     - Firebase/CoreOnly (= 12.15.0)
     - hermes-engine
     - RCTRequired
@@ -1952,6 +1983,30 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
+    - Yoga
+  - RNFBAuth (25.1.0):
+    - Firebase/Auth (= 12.15.0)
+    - hermes-engine
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-Core-prebuilt
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - ReactNativeDependencies
+    - RNFBApp
     - Yoga
   - RNGestureHandler (3.0.2):
     - hermes-engine
@@ -2273,6 +2328,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - ReactNativeDependencies (from `../node_modules/react-native/third-party-podspecs/ReactNativeDependencies.podspec`)
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
+  - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -2282,9 +2338,15 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Firebase
+    - FirebaseAppCheckInterop
+    - FirebaseAuth
+    - FirebaseAuthInterop
     - FirebaseCore
+    - FirebaseCoreExtension
     - FirebaseCoreInternal
     - GoogleUtilities
+    - GTMSessionFetcher
+    - RecaptchaInterop
 
 EXTERNAL SOURCES:
   FBLazyVector:
@@ -2442,6 +2504,8 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/ReactNativeDependencies.podspec"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
+  RNFBAuth:
+    :path: "../node_modules/@react-native-firebase/auth"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNReanimated:
@@ -2456,9 +2520,14 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   FBLazyVector: b3e7ad108f0d882e30445c5527d774e3fd432f3d
   Firebase: a8539b633d474fbeb654c7043f9c1649e274045b
+  FirebaseAppCheckInterop: 5083c9acf65f206832fe659e1c676b7bc3d55e8a
+  FirebaseAuth: 6d1d4e5875d93f82e669bee6b05a70a642025b58
+  FirebaseAuthInterop: 0778f5f24d6cccd6d67ef45832fe9c67a0b944ea
   FirebaseCore: 2e86a4ea1684d4381707069e4a6d89ac808e901e
+  FirebaseCoreExtension: 10d2a627977b39418759ad88ada80fbbd34f1c4f
   FirebaseCoreInternal: 6ab6a02c94446c026d2cf35cf5383842ebaa4992
   GoogleUtilities: 4f2618a4a1e762a1ee134a1e2323bba9843e06da
+  GTMSessionFetcher: 127211aeec0b1e904fc49f4f6f895dcc535b0ecf
   hermes-engine: 094816dd7a6a021a8a0a820bb07aa5f97e6a9629
   RCTDeprecation: 2a74a2c57675e64419bd89078efde81f7c1de90b
   RCTRequired: 30451112e6fef4e6f31b4e7eee0845156e35e4b0
@@ -2534,13 +2603,15 @@ SPEC CHECKSUMS:
   ReactCodegen: afe0d436ee089d7bea6418429d8312b1d23a6801
   ReactCommon: d5c1bb4427bf51c443de5926aac332c89ddd9363
   ReactNativeDependencies: fa0a54b3f5319ae0e3b9aff32bfee7a424b88e66
-  RNFBApp: b1ca9badee003f8fbef6d54378d2403355883f13
+  RecaptchaInterop: 11e0b637842dfb48308d242afc3f448062325aba
+  RNFBApp: 7a4ebe0527993ec03c2e996f01db0fa0da3e20b7
+  RNFBAuth: 2cb96da767a0bc479e40f38c575d14b9bf2f0c04
   RNGestureHandler: 953af68599a35f425ea962dda2ee15ee4e3ca719
   RNReanimated: a9bf68fb5f19ce1c363b7d1413dcf8ee323185b8
   RNScreens: 991cc417cd396602a6cf59a42139e5a9d91462a9
   RNWorklets: ae7f2b95d75b903387e6359583f2fd67bc9a93ff
   Yoga: fe50ab299e578f397fef753cf309c6703a4db29b
 
-PODFILE CHECKSUM: c03ecccf702e58e54c1b251019fe9717218cfc8f
+PODFILE CHECKSUM: bd41853a1401dd2c5e2c76a2eb855774473e9959
 
 COCOAPODS: 1.16.2
