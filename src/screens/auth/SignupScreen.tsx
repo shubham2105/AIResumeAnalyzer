@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TextInput } from 'react-native-gesture-handler';
 import { AuthStackParamList } from '../../navigation/types';
@@ -46,12 +47,20 @@ const SignupScreen = () => {
         data.email,
         data.password,
       );
+      console.log('User created:', credential.user.uid);
+
       await credential.user.updateProfile({
         displayName: `${data.firstName} ${data.lastName}`,
       });
+      await firestore().collection('users').doc(credential.user.uid).set({
+        uid: credential.user.uid,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        createdAt: firestore.FieldValue.serverTimestamp(),
+      });
     } catch (error) {
       const authError = error as FirebaseAuthTypes.NativeFirebaseAuthError;
-
       setAuthError(getAuthErrorMessage(authError.code));
     } finally {
       setLoading(false);

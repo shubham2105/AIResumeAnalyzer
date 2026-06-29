@@ -19,12 +19,18 @@ target 'ResumeAnalyzer' do
 
   pre_install do |installer|
     installer.pod_targets.each do |target|
-      if target.name.start_with?('Firebase') || target.name.start_with?('Google') || target.name.start_with?('Recaptcha')
+      # Matches Firebase, Google, Recaptcha, nanopb, BoringSSL, and gRPC dependencies
+      if target.name.start_with?('Firebase') || 
+         target.name.start_with?('Google') || 
+         target.name.start_with?('Recaptcha') || 
+         target.name.include?('nanopb') || 
+         target.name.include?('BoringSSL') || 
+         target.name.include?('gRPC')
+         
         target.instance_variable_set(:@build_type, Pod::BuildType.static_framework)
       end
     end
   end
-
   use_react_native!(
     :path => config[:reactNativePath],
     # An absolute path to your application root.
