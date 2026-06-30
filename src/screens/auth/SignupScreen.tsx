@@ -39,29 +39,83 @@ const SignupScreen = () => {
       confirmPassword: '',
     },
   });
+  // const onSubmit = async (data: SignupForm) => {
+  //   setAuthError('');
+  //   try {
+  //     setLoading(true);
+  //     const credential = await auth().createUserWithEmailAndPassword(
+  //       data.email,
+  //       data.password,
+  //     );
+  //     console.log('User created:', credential.user.uid);
+
+  //     await credential.user.updateProfile({
+  //       displayName: `${data.firstName} ${data.lastName}`,
+  //     });
+  //     await firestore().collection('users').doc(credential.user.uid).set({
+  //       uid: credential.user.uid,
+  //       firstName: data.firstName,
+  //       lastName: data.lastName,
+  //       email: data.email,
+  //       createdAt: firestore.FieldValue.serverTimestamp(),
+  //     });
+  //   } catch (error) {
+  //     const authError = error as FirebaseAuthTypes.NativeFirebaseAuthError;
+  //     setAuthError(getAuthErrorMessage(authError.code));
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
   const onSubmit = async (data: SignupForm) => {
     setAuthError('');
+
     try {
       setLoading(true);
+
+      console.log('🚀 Starting Signup');
+
       const credential = await auth().createUserWithEmailAndPassword(
         data.email,
         data.password,
       );
-      console.log('User created:', credential.user.uid);
+
+      console.log('✅ Auth Success');
+      console.log('UID:', credential.user.uid);
 
       await credential.user.updateProfile({
         displayName: `${data.firstName} ${data.lastName}`,
       });
-      await firestore().collection('users').doc(credential.user.uid).set({
+
+      console.log('✅ Profile Updated');
+
+      const userData = {
         uid: credential.user.uid,
         firstName: data.firstName,
         lastName: data.lastName,
         email: data.email,
         createdAt: firestore.FieldValue.serverTimestamp(),
-      });
-    } catch (error) {
-      const authError = error as FirebaseAuthTypes.NativeFirebaseAuthError;
-      setAuthError(getAuthErrorMessage(authError.code));
+      };
+
+      console.log('📝 Writing to Firestore:', userData);
+
+      await firestore()
+        .collection('users')
+        .doc(credential.user.uid)
+        .set(userData);
+
+      console.log('✅ Firestore Write Success');
+
+      console.log('🎉 Signup Complete');
+    } catch (error: any) {
+      console.error('❌ SIGNUP ERROR =>', error);
+      console.error('❌ ERROR CODE =>', error?.code);
+      console.error('❌ ERROR MESSAGE =>', error?.message);
+
+      if (error?.code) {
+        setAuthError(getAuthErrorMessage(error.code));
+      } else {
+        setAuthError('Something went wrong. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
