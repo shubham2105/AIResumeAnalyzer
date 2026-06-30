@@ -34,7 +34,28 @@ export const uploadResume = async (
     },
   );
 
-  console.log('Backend response:', response.data);
+  console.log('Backend response:', JSON.stringify(response.data, null, 2));
+  const analysis = response.data.analysis;
+  Object.entries({
+  userId: user.uid,
+  fileName,
+  fileSize,
+  mimeType,
+  extractedText: response.data.text,
+  characters: response.data.characters,
+  overallScore: analysis.overall_score,
+  summary: analysis.summary,
+  skills: analysis.skills,
+  strengths: analysis.strengths,
+  weaknesses: analysis.weaknesses,
+  recommendations: analysis.recommendations,
+  jobRoles: analysis.job_roles,
+}).forEach(([key, value]) => {
+  if (value === undefined) {
+    console.log('UNDEFINED FIELD =>', key);
+  }
+});
+
 
   const resumeDoc = await firestore()
     .collection('resumes')
@@ -45,13 +66,22 @@ export const uploadResume = async (
       mimeType,
       extractedText: response.data.text,
       characters: response.data.characters,
+      overallScore: analysis.overall_score,
+      summary: analysis.summary,
+      skills: analysis.skills,
+      strengths: analysis.strengths,
+      weaknesses: analysis.weaknesses,
+      recommendations: analysis.recommendations,
+      jobRoles: analysis.job_roles,
       uploadedAt: firestore.FieldValue.serverTimestamp(),
       status: 'uploaded',
     });
 
+    console.log('fileSize =>', fileSize);
+console.log('mimeType =>', mimeType);
+
   return {
     resumeId: resumeDoc.id,
-    text: response.data.text,
-    characters: response.data.characters,
+    analysis,
   };
 };

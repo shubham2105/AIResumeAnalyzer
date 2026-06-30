@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { pick, types } from '@react-native-documents/picker';
-
+import { useNavigation } from '@react-navigation/native';
 import { uploadResume } from '../../services/resume.service';
 
 type ResumeFile = {
@@ -19,6 +19,7 @@ type ResumeFile = {
 };
 
 const UploadScreen = () => {
+  const navigation = useNavigation<any>();
   const [file, setFile] = useState<ResumeFile | null>(null);
   const [uploading, setUploading] = useState(false);
 
@@ -67,6 +68,7 @@ const UploadScreen = () => {
       setFile(null);
 
       Alert.alert('Success', 'Resume uploaded and processed successfully.');
+      navigation.navigate('AnalysisResult', { resumeId: result.resumeId });
     } catch (error) {
       console.log('UPLOAD ERROR =>', error);
       console.log('UPLOAD ERROR STRING =>', JSON.stringify(error, null, 2));

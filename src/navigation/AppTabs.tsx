@@ -5,6 +5,7 @@ import UploadScreen from '../screens/upload/UploadScreen';
 import HistoryScreen from '../screens/history/HistoryScreen';
 import ProfileScreen from '../screens/profile/ProfileScreen';
 import { History, Home, Upload, User } from 'lucide-react-native';
+import { UploadStack } from './UploadStack';
 
 const Tab = createBottomTabNavigator<AppTabsParamList>();
 
@@ -21,7 +22,7 @@ export function AppTabs() {
       />
       <Tab.Screen
         name="Upload"
-        component={UploadScreen}
+        component={UploadStack}
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => <Upload color={'black'} size={20} />,

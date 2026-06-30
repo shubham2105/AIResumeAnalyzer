@@ -23,7 +23,7 @@ export type AppStackParamList = {
         resumeId: string;
     };
     AnalysisResult:{
-        analysisId: string;
+        resumeId: string;
     };
     ResumeDetail:{
         resumeId: string;
