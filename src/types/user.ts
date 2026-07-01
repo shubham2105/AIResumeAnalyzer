@@ -4,9 +4,16 @@ export interface User {
     fullName? : string;
     photoUrl? : string;
 };
-type ResumeFile = {
+export type ResumeFile = {
   uri: string;
   name: string;
   size?: number;
   type?: string;
 };
+
+export type Resume = {
+  id: string;
+  fileName: string;
+  overallScore: number;
+  summary: string;
+}
